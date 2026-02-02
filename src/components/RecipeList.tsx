@@ -1,29 +1,15 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {Recipe, RecipeProps} from "../types";
 
-// VO
-interface Food {
-    fno: number;
-    name: string;
-    poster: string;
-
-}
-
-interface FoodListProps {
-    list: Food[];
-    curpage: number;
-    totalpage: number;
-    startPage: number;
-    endPage: number;
-}
-
-function FoodList() {
+function RecipeList() {
     const [curpage, setCurpage] = useState<number>(1);
-    const [data, setData] = useState<FoodListProps>();
+    const [data, setData] = useState<RecipeProps>();
+
     useEffect(() => {
-        axios.get(`http://localhost/food/list_react/${curpage}`)
-            .then(res => {
-                console.log(res.data);
+        axios.get(`http://localhost/recipe/list_react/${curpage}`)
+            .then((res) => {
+                console.log(res);
                 setData(res.data);
             })
     }, [curpage]);
@@ -61,13 +47,16 @@ function FoodList() {
         )
     }
 
-    const html: any = data?.list.map((food: Food) =>
+    const html: any = data?.list.map((recipe: Recipe) =>
         <div className="col-md-4">
             <div className="thumbnail">
                 <a href="#">
-                    <img src={food.poster} style={{"width": "240px", "height": "150px"}}/>
+                    <img src={recipe.poster}
+                         style={{"width": "240px", "height": "150px"}}
+                         title={recipe.title}
+                    />
                     <div className="caption">
-                        <p>{food.name}</p>
+                        <p>{recipe.title}</p>
                     </div>
                 </a>
             </div>
@@ -86,5 +75,4 @@ function FoodList() {
         </div>
     )
 }
-
-export default FoodList;
+export default RecipeList;

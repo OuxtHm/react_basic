@@ -8,12 +8,13 @@ import App2 from "./components/App2";
 import App3 from './components/App3'
 import App4 from './components/App4'
 import FoodList from './components/FoodList'
+import RecipeList from './components/RecipeList'
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <FoodList />
+    <RecipeList />
   </React.StrictMode>
 );
 
